@@ -1,10 +1,19 @@
 const Task = require("../models/task_model");
-const getAlltask = (req,res)=>{
-    res.send("all tasks in forlder");
+const getAlltask = async (req,res)=>{
+   try{
+    const tasks = await Task.find({});
+    res.status(200).json({task});
+   }catch(e){
+       res.status(500).json({e});
+   }
 }
 const creatlTask =async (req,res)=>{
+    try{
     const task = await Task.create(req.body);
     res.status(201).json({task});
+    }catch(error){
+        res.status(500).json({msg:error.message})
+    }
 }
 const getSingletask = (req,res)=>{
     res.json({"id":req.params.id});
