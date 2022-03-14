@@ -1,12 +1,17 @@
-const conectDB = require("./db/connect");
 const express = require("express");
 const app = express();
+const tasks =require("./routes/routes");
+const conectDB = require("./db/connect");
+
 require("dotenv").config();
-const task =require("./routes/routes");
-//using jsoon file
+
+
+//middle where
+app.use(express.static("./public"));
 app.use(express.json());
 //task routes and functions
-app.use("/api/v1/task",task);
+app.use("/api/v1/tasks/",tasks);
+
 const port = 3000;
 const start =async()=>{
     try {
@@ -15,7 +20,7 @@ const start =async()=>{
             console.log(`Server is listening in port: ${port}...`)
         )
     } catch (error) {
-        console.log(error)
+        console.log("this is the error:",error);
     }
 }
 start();

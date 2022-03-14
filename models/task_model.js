@@ -4,7 +4,7 @@ const task_schema = new mongoose.Schema({
         type:String,
         required:[true,"you must write a name"],
         trime:true,
-        maxLength:[20,"don't wirte morethan 20 cracter."]
+        maxLength:[40,"don't wirte morethan 20 cracter."]
     },
     completed:{
         type:Boolean,
