@@ -2,17 +2,18 @@ const express = require("express");
 const app = express();
 const tasks =require("./routes/routes");
 const conectDB = require("./db/connect");
-
+const notfound = require("./middle_ware/notfound");
 require("dotenv").config();
-
+require("./routes/deploy")(app);
 
 //middle where
 app.use(express.static("./public"));
 app.use(express.json());
 //task routes and functions
 app.use("/api/v1/tasks/",tasks);
-
-const port = 3000;
+//not found status handlling
+app.use(notfound);
+const port =process.env.PORT || 3000;
 const start =async()=>{
     try {
         await conectDB(process.env.url);
