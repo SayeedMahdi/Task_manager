@@ -4,15 +4,21 @@ const tasks =require("./routes/routes");
 const conectDB = require("./db/connect");
 const notfound = require("./middle_ware/notfound");
 require("dotenv").config();
-require("./routes/deploy")(app);
+// require("./routes/deploy")(app);
+const midlleWareHandler = require("./middle_ware/errorHandle");
+
 
 //middle where
 app.use(express.static("./public"));
 app.use(express.json());
+
 //task routes and functions
-app.use("/api/v1/tasks/",tasks);
+app.use("/api/v1/tasks",tasks);
 //not found status handlling
 app.use(notfound);
+//error handler
+app.use(midlleWareHandler);
+//port assing
 const port =process.env.PORT || 3000;
 const start =async()=>{
     try {
