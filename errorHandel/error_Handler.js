@@ -6,7 +6,7 @@ class customAPIerror extends Error {
     }
 }
 const createCustom = (statusCode , message)=>{
-    new customAPIerror(statusCode, message);
+  return  new customAPIerror(statusCode, message);
 }
 module.exports ={
     createCustom,
